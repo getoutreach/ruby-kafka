@@ -209,7 +209,8 @@ module Kafka
     rescue NoPartitionsToFetchFrom
       backoff = @max_wait_time > 0 ? @max_wait_time : 1
 
-      @logger.info "There are no partitions to fetch from, sleeping for #{backoff}s"
+      # This logging statement was causing us to log millions of times
+      # @logger.info "There are no partitions to fetch from, sleeping for #{backoff}s"
       sleep backoff
 
       []
